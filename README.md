@@ -54,7 +54,6 @@ Para a segunda etapa do teste, você deverá desenvolver uma SPA (Single Page Ap
 - Você pode usar frameworks, tanto para o front-end (a sua escolha), quanto para o back-end (Laravel 8).
 - Você pode usar ferramentas de automação (Grunt, Gulp), mas deverá informar o uso completo para funcionamento do teste.
 - Será considerado ponto positivo no teste a utilização de orientação a objetos, design patterns e rotinas para testes.
-- Será considerado ponto positivo o tempo gasto na realização do teste. Menos tempo e tudo funcionando conforme pedido será melhor avaliado.
 
 
 ## Entrega
