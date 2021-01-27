@@ -1,0 +1,21 @@
+openapi: 3.0.0
+info:
+  title: 'Cars API'
+  version: '1.0'
+paths:
+  /carros:
+    get:
+      summary: 'Car list'
+      description: 'Returns a list containing all Car resources'
+      operationId: 'App\Http\Controllers\Api\CarController::index'
+      responses:
+        '200':
+          description: 'A list with courses'
+          content:
+            application/json:
+              schema:
+                properties:
+                  data: { description: 'Token expiration in miliseconds', type: array, items: {  } }
+                type: object
+                example:
+                  data: [{ id: '1', model: 'Example Model', year: '2021', brand_id: '1', brand_name: 'Example Brand Name' }]
