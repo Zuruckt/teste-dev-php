@@ -8,17 +8,22 @@ Após clonar o repositório para sua máquina, entre em seu diretório e instale
 ```sh
 $ composer install
 ```
-Depois disso, copie o arquivo `.env.example` para `.env` e gere a chave da aplicação.
+Depois disso, copie o arquivo `.env.example` para `.env` e gere a chave da aplicação:
 ```sh
 $ cp .env.example .env
 $ php artisan key:generate
 ```
 
-Crie um banco de dados MySQL e insira os detalhes da conexão no arquivo `.env`
+Crie um banco de dados MySQL e insira os detalhes da conexão no arquivo `.env`:
 ```dotenv
 DB_DATABASE=example_database
 DB_USERNAME=example_user
 DB_PASSWORD=qwe123
+```
+
+Após isso, rode as migrations para inserir as tabelas e dados falsos no banco:
+```sh
+$ php artisan migrate --seed
 ```
 
 ## Rodando o servidor
