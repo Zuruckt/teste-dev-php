@@ -6,6 +6,22 @@ servers:
   -
     url: /api
 paths:
+  /brands:
+    get:
+      summary: 'Brand index'
+      description: 'Returns a list containing all Brand resources'
+      operationId: 'App\Http\Controllers\Api\BrandController::__invoke'
+      responses:
+        '200':
+          description: 'A list with all registered brands'
+          content:
+            application/json:
+              schema:
+                properties:
+                  data: { description: 'Array of Brand models', type: array, items: {  } }
+                type: object
+                example:
+                  data: [{ id: 1, name: Ford }]
   /cars:
     get:
       summary: 'Car index'
@@ -13,12 +29,12 @@ paths:
       operationId: 'App\Http\Controllers\Api\CarController::index'
       responses:
         '200':
-          description: 'A list with courses'
+          description: 'A list with all registered cars'
           content:
             application/json:
               schema:
                 properties:
-                  data: { description: 'Array of Car Objects', type: array, items: {  } }
+                  data: { description: 'Array of Car models', type: array, items: {  } }
                 type: object
                 example:
                   data: [{ id: '1', model: 'Example Model', year: '2021', brand_id: '1', brand_name: 'Example Brand Name' }]

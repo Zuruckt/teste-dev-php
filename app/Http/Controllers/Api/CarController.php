@@ -26,7 +26,7 @@ class CarController extends Controller
      *     description="Returns a list containing all Car resources",
      *     @OA\Response(
      *          response="200",
-     *          description="A list with courses",
+     *          description="A list with all registered cars",
      *          content={
      *             @OA\MediaType(
      *                 mediaType="application/json",
@@ -34,7 +34,7 @@ class CarController extends Controller
      *                     @OA\Property(
      *                         property="data",
      *                         type="array",
-     *                         description="Array of Car Objects",
+     *                         description="Array of Car models",
      *                         @OA\Items()
      *                     ),
      *                     example={
