@@ -2,10 +2,13 @@ openapi: 3.0.0
 info:
   title: 'Cars API'
   version: '1.0'
+servers:
+  -
+    url: /api
 paths:
-  /carros:
+  /cars:
     get:
-      summary: 'Car list'
+      summary: 'Car index'
       description: 'Returns a list containing all Car resources'
       operationId: 'App\Http\Controllers\Api\CarController::index'
       responses:
@@ -15,7 +18,172 @@ paths:
             application/json:
               schema:
                 properties:
-                  data: { description: 'Token expiration in miliseconds', type: array, items: {  } }
+                  data: { description: 'Array of Car Objects', type: array, items: {  } }
                 type: object
                 example:
                   data: [{ id: '1', model: 'Example Model', year: '2021', brand_id: '1', brand_name: 'Example Brand Name' }]
+    post:
+      summary: 'Car creation'
+      description: 'Create a new Car'
+      operationId: 'App\Http\Controllers\Api\CarController::store'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - model
+                - year
+                - brand_id
+              properties:
+                model:
+                  description: 'The car''s model name'
+                  type: string
+                  example: Uno
+                year:
+                  description: 'The car''s release year'
+                  type: integer
+                  example: '2018'
+                brand_id:
+                  description: 'The car''s brand id, check /brands'
+                  type: integer
+                  example: '1'
+              type: object
+      responses:
+        '201':
+          description: 'The Car was created successfully'
+          content:
+            application/json:
+              schema:
+                properties:
+                  data: { description: 'Car Object', type: array, items: {  } }
+                type: object
+                example:
+                  data: { id: '24', model: Uno, year: '2018', brand_id: '1', brand_name: Fiat }
+        '400':
+          description: 'The given data was invalid'
+          content:
+            application/json:
+              schema:
+                properties:
+                  data: { description: 'Car Object', type: array, items: {  } }
+                type: object
+                example:
+                  error: { model: ['The model field is required'], year: ['The year must be an integer'], brand_id: ['The selected brand id is invalid'] }
+  '/cars/{id}':
+    get:
+      summary: 'Car lookup'
+      description: 'Returns the requested Car data'
+      operationId: 'App\Http\Controllers\Api\CarController::show'
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'The unique indentifier for the car'
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 'A Car Object'
+          content:
+            application/json:
+              schema:
+                properties:
+                  data: { description: 'Car Object data', type: array, items: {  } }
+                type: object
+                example:
+                  data: { id: '77', model: Celta, year: '2016', brand_id: '14', brand_name: Chevrolet }
+        '404':
+          description: 'Model not found'
+          content:
+            application/json:
+              schema:
+                properties:
+                  error: { description: 'No model found for the given ID', type: string }
+                type: object
+                example:
+                  error: 'No query results for model [App\\Models\\Car] 0'
+    put:
+      summary: 'Car update'
+      description: 'Update a existing car'
+      operationId: 'App\Http\Controllers\Api\CarController::update'
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'The unique indentifier for the car'
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                model:
+                  description: 'The car''s model name'
+                  type: string
+                  example: Uno
+                year:
+                  description: 'The car''s release year'
+                  type: integer
+                  example: '2018'
+                brand_id:
+                  description: 'The car''s brand id, check /brands'
+                  type: integer
+                  example: '1'
+              type: object
+      responses:
+        '201':
+          description: 'The Car was updated successfully'
+          content:
+            application/json:
+              schema:
+                properties:
+                  data: { description: 'Car Object', type: array, items: {  } }
+                type: object
+                example:
+                  data: { id: '24', model: Uno, year: '2018', brand_id: '1', brand_name: Fiat }
+        '400':
+          description: 'The given data was invalid'
+          content:
+            application/json:
+              schema:
+                properties:
+                  data: { description: 'Car Object', type: array, items: {  } }
+                type: object
+                example:
+                  error: { model: ['The model field is required'], year: ['The year must be an integer'], brand_id: ['The selected brand id is invalid'] }
+        '404':
+          description: 'Model not found'
+          content:
+            application/json:
+              schema:
+                properties:
+                  error: { description: 'No model found for the given ID', type: string }
+                type: object
+                example:
+                  error: 'No query results for model [App\\Models\\Car] 0'
+    delete:
+      summary: 'Car deletion'
+      description: 'Delete the requested car'
+      operationId: 'App\Http\Controllers\Api\CarController::delete'
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'The unique indentifier for the car'
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 'Car deletion confirmation'
+          content:
+            application/json:
+              schema:
+                properties:
+                  message: { description: 'Delete confirmation', type: string }
+                type: object
+                example:
+                  message: 'Resource deleted'
