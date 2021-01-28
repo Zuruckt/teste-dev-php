@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Car;
 use App\Traits\RespondsApi;
 use Illuminate\Http\Request;
 use App\Repositories\CarRepository;
