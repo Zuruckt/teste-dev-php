@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\CarController;
+use App\Http\Controllers\Api\BrandController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,4 +24,6 @@ Route::group(['prefix' => 'cars'], function () {
     Route::put('/{id}', [CarController::class, 'update']);
     Route::delete('/{id}', [CarController::class, 'delete']);
 });
+
+Route::get('/brands', BrandController::class);
 
