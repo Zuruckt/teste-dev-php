@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\CarController;
@@ -23,6 +24,14 @@ Route::group(['prefix' => 'cars'], function () {
     Route::get('/{id}', [CarController::class, 'show']);
     Route::put('/{id}', [CarController::class, 'update']);
     Route::delete('/{id}', [CarController::class, 'delete']);
+});
+
+Route::group(['prefix' => 'users'], function () {
+    Route::post('/login', [AuthController::class,'login']);
+    Route::post('/logout', [AuthController::class,'logout']);
+    Route::get('/me', [AuthController::class,'me']);
+    Route::get('/refresh', [AuthController::class,'refresh']);
+    Route::post('/register', [AuthController::class,'register']);
 });
 
 Route::get('/brands', BrandController::class);
